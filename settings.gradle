@@ -1,0 +1,2 @@
+rootProject.name = "MySuperList"
+include ':app'
