@@ -9,11 +9,17 @@ import com.example.mysuperlist.data.card
 import com.example.mysuperlist.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.mysuperlist.AddCardActivity
+
+private lateinit var binding: ActivityMainBinding
 public var cardlist = mutableListOf<card>()
+
+public fun update_screen(con : MainActivity){
+    binding.recycleFront.layoutManager = LinearLayoutManager(con)
+    binding.recycleFront.adapter = frontRecycleAdapter(cardlist.sortedBy { card -> card.Title })
+}
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -23,11 +29,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,AddCardActivity::class.java)
             startActivity(intent)
         }
-        update_screen()
+        update_screen(this)
     }
 
-    public fun update_screen(){
-        recycle_front.layoutManager = LinearLayoutManager(this)
-        recycle_front.adapter = frontRecycleAdapter(cardlist.sortedBy { card -> card.Title })
-    }
+
 }
