@@ -8,6 +8,18 @@
     tools:context=".MainActivity">
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@id/recycle_front"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/add"
+        android:focusable="true" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_front"
         android:layout_width="match_parent"
