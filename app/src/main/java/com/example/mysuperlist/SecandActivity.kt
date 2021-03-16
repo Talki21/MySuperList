@@ -13,7 +13,6 @@ import com.example.mysuperlist.databinding.ActivitySecandBinding
 
 
 
-
 private lateinit var binding: ActivitySecandBinding
 
 fun update_secand_screen(con : SecandActivity,id:Int){
@@ -24,11 +23,13 @@ fun update_secand_screen(con : SecandActivity,id:Int){
             it.list.forEach { x ->
                 inn_card_show.add(x)
             }
+            binding.cardTitleTop.text = it.Title
+            binding.progressBarTop.progress = it.Progress
+            binding.prosentInn.text = "${it.Progress}%"
         }
     }
     binding.recycleSecand.adapter = secandRecycleAdapter(inn_card_show)
     binding.recycleSecand.layoutManager = LinearLayoutManager(con)
-
 }
 
 
@@ -39,9 +40,10 @@ class SecandActivity() : AppCompatActivity(){
 
         binding = ActivitySecandBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val top_title = intent.getStringExtra("cardtitle")
+
         val id = intent.getIntExtra("id",0)
-        supportActionBar?.title = top_title + id.toString()
+
+        if (supportActionBar!=null) { this.supportActionBar?.hide() }
         binding.floatingActionButtonInn.setOnClickListener{
             val intent = Intent(this,AddInnCardActivity::class.java)
             intent.putExtra("id2",id)

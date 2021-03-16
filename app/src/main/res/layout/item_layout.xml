@@ -40,9 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:max="100"
-                />
+                android:layout_marginEnd="5dp"
+                android:max="100" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,21 +52,27 @@
             android:layout_alignTop="@+id/card_box"
             android:layout_alignParentEnd="true"
             android:orientation="horizontal"
-            android:layout_marginEnd="10dp">
+            >
 
+            <TextView
+                android:id="@+id/prosent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_margin="2dp"/>
 
             <Button
                 android:id="@+id/card_Remove"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
+                android:layout_margin="2dp"
                 />
 
             <Button
                 android:id="@+id/card_Edit"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                android:layout_margin="2dp"
                 />
         </LinearLayout>
     </RelativeLayout>

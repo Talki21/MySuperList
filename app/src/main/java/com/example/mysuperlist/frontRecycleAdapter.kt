@@ -17,13 +17,13 @@ class frontRecycleAdapter(public var cards: MutableList<card>):RecyclerView.Adap
        fun bind(card: card) {
             binding.cardTitle.text = card.Title
             binding.progressBar.progress = card.Progress
+            binding.prosent.text = "${card.Progress}%"
        }
        fun new(this_Ac:MainActivity){
            itemView.setOnClickListener {
                val position: Int = adapterPosition
                val intent = Intent(it.context,SecandActivity::class.java)
                card_id = cardlist[position].id
-               intent.putExtra("cardtitle", cardlist[position].Title)
                intent.putExtra("id", card_id)
                it.context.startActivity(intent)
                update_main_screen(MainActivity())
