@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -27,25 +27,29 @@
                 android:layout_gravity="center"
                 android:layout_margin="20dp"/>
         </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_front"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="visible"
             tools:itemCount="20"
-            tools:listitem="@layout/item_layout"/>
+            tools:listitem="@layout/item_layout" />
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
+        android:background="@color/white"
         android:clickable="true"
         android:contentDescription="@string/add"
         android:focusable="true"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+        app:srcCompat="@drawable/ic_add" />
 
 </RelativeLayout>

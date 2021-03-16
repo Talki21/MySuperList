@@ -26,12 +26,6 @@ class secandRecycleAdapter ( var todos:MutableList<inn_card>):RecyclerView.Adapt
             }
         }
         init {
-            itemView.setOnClickListener {
-                val position: Int = adapterPosition
-                println("11111111*******${position}")
-            }
-        }
-        init {
             binding.cardInnRemove.setOnClickListener {
                 val position: Int = adapterPosition
                cardlist.forEach {

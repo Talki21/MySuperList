@@ -57,23 +57,27 @@
             <TextView
                 android:id="@+id/prosent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="15sp"
-                android:layout_margin="2dp"/>
+                android:layout_margin="2dp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/card_Remove"
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                />
+                android:background="@color/white"
+                android:contentDescription="@string/delet"
+                android:src="@android:drawable/ic_menu_delete" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/card_Edit"
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                />
+                android:background="@color/white"
+                android:contentDescription="@string/edit"
+                android:src="@android:drawable/ic_menu_edit" />
         </LinearLayout>
     </RelativeLayout>
 

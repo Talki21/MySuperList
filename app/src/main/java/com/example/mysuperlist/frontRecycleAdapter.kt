@@ -33,6 +33,7 @@ class frontRecycleAdapter(public var cards: MutableList<card>):RecyclerView.Adap
            binding.cardRemove.setOnClickListener {
                val position: Int = adapterPosition
                cardlist.removeAt(position)
+               save(cardlist, path)
                update_main_screen(MainActivity())
 
            }
