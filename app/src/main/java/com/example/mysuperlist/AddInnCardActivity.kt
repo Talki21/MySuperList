@@ -28,6 +28,7 @@ class AddInnCardActivity: AppCompatActivity() {
                 }
             }
             put_progress(id2)
+            save(cardlist, path)
             finish()
         }
 

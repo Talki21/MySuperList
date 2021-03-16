@@ -20,7 +20,7 @@ class AddCardActivity: AppCompatActivity() {
            val title= binding.AddTitle.text.toString()
             val inn_card_show  = mutableListOf<inn_card>()
             cardlist.add(card(Title = title,list = inn_card_show))
-            println("1111111***${cardlist}")
+            save(cardlist, path)
             finish()
         }
 
