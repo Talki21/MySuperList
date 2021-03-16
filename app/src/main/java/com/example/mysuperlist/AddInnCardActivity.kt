@@ -15,13 +15,19 @@ class AddInnCardActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddinncardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.title = "Add New Inn List"
-
+        var index:Int =0
         binding.SaveNewInnCard.setOnClickListener {
             val title= binding.AddInnTitle.text.toString()
             val id2 = intent.getIntExtra("id2",0)
-            inn_cardList.add(inn_card(id2,false,title))
+            val inn_card_show:inn_card = inn_card(inn_id = id2,check = false,inn_title = title)
+            cardlist.forEach {
+                if (it.id == id2)
+                {
+                    it.list.add(inn_card_show)
+                }
+            }
+            put_progress(id2)
             finish()
         }
 
