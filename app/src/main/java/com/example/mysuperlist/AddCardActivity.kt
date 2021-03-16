@@ -1,9 +1,9 @@
 package com.example.mysuperlist
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mysuperlist.data.card
+import com.example.mysuperlist.data.inn_card
 import com.example.mysuperlist.databinding.ActivityAddcardBinding
 
 class AddCardActivity: AppCompatActivity() {
@@ -17,8 +17,10 @@ class AddCardActivity: AppCompatActivity() {
         supportActionBar?.title = "Add New List"
 
         binding.SaveNewCard.setOnClickListener {
-           var title= binding.AddTitle.text.toString()
-            cardlist.add(card(Title = title))
+           val title= binding.AddTitle.text.toString()
+            val inn_card_show  = mutableListOf<inn_card>()
+            cardlist.add(card(Title = title,list = inn_card_show))
+            println("1111111***${cardlist}")
             finish()
         }
 

@@ -10,7 +10,7 @@ import com.example.mysuperlist.databinding.ItemLayoutBinding
 
 
 
-
+var card_id:Int = 0
 class frontRecycleAdapter(public var cards: MutableList<card>):RecyclerView.Adapter<frontRecycleAdapter.ViewHolder>()
 {
    class ViewHolder (val binding:ItemLayoutBinding ) : RecyclerView.ViewHolder(binding.root){
@@ -22,16 +22,17 @@ class frontRecycleAdapter(public var cards: MutableList<card>):RecyclerView.Adap
            itemView.setOnClickListener {
                val position: Int = adapterPosition
                val intent = Intent(it.context,SecandActivity::class.java)
+               card_id = cardlist[position].id
                intent.putExtra("cardtitle", cardlist[position].Title)
-               intent.putExtra("id", cardlist[position].id)
+               intent.putExtra("id", card_id)
                it.context.startActivity(intent)
+               update_main_screen(MainActivity())
            }
        }
        init {
            binding.cardRemove.setOnClickListener {
                val position: Int = adapterPosition
                cardlist.removeAt(position)
-               inn_cardList.removeAll { innCard: inn_card ->innCard.id == cardlist[position].id  }
                update_main_screen(MainActivity())
 
            }
