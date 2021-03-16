@@ -8,7 +8,8 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    app:cardCornerRadius="230dp">
+    app:cardCornerRadius="230dp"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/card_inn"

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "My Super List"
+         if (supportActionBar!=null) { this.supportActionBar?.hide() }
 
         binding.floatingActionButton.setOnClickListener{
             val intent = Intent(this,AddCardActivity::class.java)
