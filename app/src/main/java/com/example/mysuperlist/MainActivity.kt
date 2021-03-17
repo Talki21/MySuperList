@@ -1,12 +1,19 @@
 package com.example.mysuperlist
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mysuperlist.data.card
 import com.example.mysuperlist.data.inn_card
 import com.example.mysuperlist.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import java.io.FileOutputStream
 import java.nio.file.Path
@@ -23,13 +30,19 @@ fun update_main_screen(Main : MainActivity){ // updata hoved skjerm
 }
 var path: File? = null
 class MainActivity : AppCompatActivity() {
+    private val tag:String ="My Super List M"
+    private lateinit var auth: FirebaseAuth
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+         auth = Firebase.auth
+         signInAnonymously(auth,tag)
          if (supportActionBar!=null) { this.supportActionBar?.hide() }
+
+
 
         binding.floatingActionButton.setOnClickListener{
             val intent = Intent(this,AddCardActivity::class.java)
@@ -71,15 +84,37 @@ fun put_progress(int: Int){
     update_secand_screen(SecandActivity(),int)
     update_main_screen(MainActivity())
 }
+
 fun save(list: MutableList<card>,path:File?){
     if (path!=null)
     {
-        if (File(path,"Cardlist").exists()){File(path,"Cardlist").delete()}
-        val file = File(path,"Cardlist")
+        if (File(path,"Cardlist.txt").exists()){File(path,"Cardlist.txt").delete()}
+        val file = File(path,"Cardlist.txt")
         FileOutputStream(file, true).bufferedWriter().use { writer ->
             list.forEach {
                 writer.write("${it.toString()}*****************************\n")
             }
+            upload(file.toUri(),"MySuperLit")
         }
+    }
+}
+
+private fun signInAnonymously(auth:FirebaseAuth,tag:String){
+    auth.signInAnonymously().addOnSuccessListener {
+        Log.d(tag,"Login success ${it.user.toString()}")
+    }.addOnFailureListener{
+        Log.e(tag,"Login failed",it)
+    }
+}
+
+private fun upload(file: Uri,tag: String){
+    Log.d(tag, "upload file $file")
+    val ref = FirebaseStorage.getInstance().reference.child("lists/${file.lastPathSegment}")
+    val uploadTask = ref.putFile(file)
+
+    uploadTask.addOnSuccessListener {
+        Log.d(tag,"Saved file to firebase ${it.toString()}")
+    }.addOnFailureListener{
+        Log.e(tag,"Error saving file to firebase",it)
     }
 }
