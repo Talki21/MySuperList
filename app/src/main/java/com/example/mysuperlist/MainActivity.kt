@@ -1,60 +1,63 @@
 package com.example.mysuperlist
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.icu.text.CaseMap
 import android.os.Bundle
 import android.util.Log
-import androidx.core.net.toUri
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mysuperlist.data.card
 import com.example.mysuperlist.data.inn_card
 import com.example.mysuperlist.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
+
 import java.io.File
 import java.io.FileOutputStream
-import java.nio.file.Path
+import java.util.*
 
 
 // å sette den her gir meg mulighet til å lage funksjon på utside av MainActivity for å updatere skjermen
 private lateinit var binding: ActivityMainBinding
 var cardlist = mutableListOf<card>() // å deklrere hoved listen her gir fleksibiletet til å endre eller addere hvor som helst
+val ref = FirebaseDatabase.getInstance().getReference("lists")
+
+
 
 fun update_main_screen(Main : MainActivity){ // updata hoved skjerm
     binding.recycleFront.adapter = frontRecycleAdapter(cardlist)
     binding.recycleFront.layoutManager = LinearLayoutManager(Main)
-
 }
-var path: File? = null
-class MainActivity : AppCompatActivity() {
-    private val tag:String ="My Super List M"
-    private lateinit var auth: FirebaseAuth
 
+
+class MainActivity : AppCompatActivity() {
+
+    private val tag:String ="My Super List M"
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-         auth = Firebase.auth
+         update_main_screen(MainActivity())
+         val auth = Firebase.auth
          signInAnonymously(auth,tag)
+         upload()
+
          if (supportActionBar!=null) { this.supportActionBar?.hide() }
 
-
-
-        binding.floatingActionButton.setOnClickListener{
+         binding.floatingActionButton.setOnClickListener{
             val intent = Intent(this,AddCardActivity::class.java)
             startActivity(intent)
-        }
-         update_main_screen(this)
-
-         path = this.baseContext.getExternalFilesDir(null)
+         }
+         update_main_screen(MainActivity())
     }
 
     override fun onBackPressed() {
-
+    update_main_screen(MainActivity())
     }
 }
 fun put_progress(int: Int){
@@ -80,41 +83,49 @@ fun put_progress(int: Int){
 
         }
     }
-    save(cardlist, path)
     update_secand_screen(SecandActivity(),int)
     update_main_screen(MainActivity())
 }
 
-fun save(list: MutableList<card>,path:File?){
-    if (path!=null)
-    {
-        if (File(path,"Cardlist.txt").exists()){File(path,"Cardlist.txt").delete()}
-        val file = File(path,"Cardlist.txt")
-        FileOutputStream(file, true).bufferedWriter().use { writer ->
-            list.forEach {
-                writer.write("${it.toString()}*****************************\n")
-            }
-            upload(file.toUri(),"MySuperLit")
-        }
-    }
-}
-
-private fun signInAnonymously(auth:FirebaseAuth,tag:String){
+private fun signInAnonymously(auth: FirebaseAuth, tag:String){
     auth.signInAnonymously().addOnSuccessListener {
-        Log.d(tag,"Login success ${it.user.toString()}")
+        Log.d(tag,"Login success ${it.user?.toString()}")
     }.addOnFailureListener{
         Log.e(tag,"Login failed",it)
     }
 }
 
-private fun upload(file: Uri,tag: String){
-    Log.d(tag, "upload file $file")
-    val ref = FirebaseStorage.getInstance().reference.child("lists/${file.lastPathSegment}")
-    val uploadTask = ref.putFile(file)
-
-    uploadTask.addOnSuccessListener {
-        Log.d(tag,"Saved file to firebase ${it.toString()}")
-    }.addOnFailureListener{
-        Log.e(tag,"Error saving file to firebase",it)
+fun upload(){
+    cardlist.clear()
+    val get = object : ValueEventListener {
+        override fun onDataChange(p0: DataSnapshot) {
+            p0.children.forEach {
+                val id = it.child("id").value.toString().toInt()
+                val tit = it.child("title").value.toString()
+                val pro = it.child("progress").value.toString().toInt()
+                val list =it.child("list")
+                val inn_card_list  = mutableListOf<inn_card>()
+                if (list.children.count()!=0) {
+                    list.children.forEach { d ->
+                        val inn_tit = d.child("inn_title").value.toString()
+                        val inn_id = d.child("inn_id").value.toString().toInt()
+                        val check = d.child("check").value.toString().toBoolean()
+                        val inn_card = inn_card(inn_id,check,inn_tit)
+                        inn_card_list.add(inn_card)
+                    }
+                }
+                val Card = card(id,tit,pro,inn_card_list)
+                cardlist.add(Card)
+            }
+        }
+        override fun onCancelled(error: DatabaseError) {
+        }
     }
+    ref.addListenerForSingleValueEvent(get)
 }
+
+
+
+
+
+

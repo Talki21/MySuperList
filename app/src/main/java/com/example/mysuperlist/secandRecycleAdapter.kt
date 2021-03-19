@@ -1,15 +1,14 @@
 package com.example.mysuperl
 
 
-import android.content.Intent
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysuperlist.*
-import com.example.mysuperlist.data.card
 import com.example.mysuperlist.data.inn_card
 import com.example.mysuperlist.databinding.ItemInnLayoutBinding
-import com.example.mysuperlist.databinding.ItemLayoutBinding
+
 
 
 class secandRecycleAdapter ( var todos:MutableList<inn_card>):RecyclerView.Adapter<secandRecycleAdapter.ViewHolder>()
@@ -35,6 +34,8 @@ class secandRecycleAdapter ( var todos:MutableList<inn_card>):RecyclerView.Adapt
                        put_progress(card_id)
                    }
                }
+                ref.setValue(cardlist)
+                update_secand_screen(SecandActivity(), card_id)
             }
         }
         init {
@@ -56,6 +57,8 @@ class secandRecycleAdapter ( var todos:MutableList<inn_card>):RecyclerView.Adapt
                         put_progress(card_id)
                     }
                 }
+                ref.setValue(cardlist)
+                update_secand_screen(SecandActivity(), card_id)
             }
         }
     }

@@ -20,11 +20,9 @@ class AddCardActivity: AppCompatActivity() {
            val title= binding.AddTitle.text.toString()
             val inn_card_show  = mutableListOf<inn_card>()
             cardlist.add(card(Title = title,list = inn_card_show))
-            save(cardlist, path)
+            ref.setValue(cardlist)
+            update_main_screen(MainActivity())
             finish()
         }
-
     }
-
-
 }
