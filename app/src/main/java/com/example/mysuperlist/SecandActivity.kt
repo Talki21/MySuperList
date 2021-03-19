@@ -1,15 +1,14 @@
 package com.example.mysuperlist
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mysuperl.secandRecycleAdapter
-import com.example.mysuperlist.data.card
 import com.example.mysuperlist.data.inn_card
 import com.example.mysuperlist.databinding.ActivitySecandBinding
+
+
 
 
 
@@ -41,15 +40,16 @@ class SecandActivity() : AppCompatActivity(){
         binding = ActivitySecandBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val id = intent.getIntExtra("id",0)
+        val ID = intent.getIntExtra("id", 0)
 
-        if (supportActionBar!=null) { this.supportActionBar?.hide() }
-        binding.floatingActionButtonInn.setOnClickListener{
-            val intent = Intent(this,AddInnCardActivity::class.java)
-            intent.putExtra("id2",id)
+        if (supportActionBar != null) { this.supportActionBar?.hide() }
+
+        binding.floatingActionButtonInn.setOnClickListener {
+            val intent = Intent(this, AddInnCardActivity::class.java)
+            intent.putExtra("id2", ID)
             startActivity(intent)
         }
-        update_secand_screen(this, id)
+        update_secand_screen(this,ID)
     }
 
     override fun onBackPressed() {

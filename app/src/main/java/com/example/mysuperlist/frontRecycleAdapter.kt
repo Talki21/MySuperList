@@ -19,7 +19,7 @@ class frontRecycleAdapter(public var cards: MutableList<card>):RecyclerView.Adap
             binding.progressBar.progress = card.Progress
             binding.prosent.text = "${card.Progress}%"
        }
-       fun new(this_Ac:MainActivity){
+       init {
            itemView.setOnClickListener {
                val position: Int = adapterPosition
                val intent = Intent(it.context,SecandActivity::class.java)
@@ -33,9 +33,8 @@ class frontRecycleAdapter(public var cards: MutableList<card>):RecyclerView.Adap
            binding.cardRemove.setOnClickListener {
                val position: Int = adapterPosition
                cardlist.removeAt(position)
-               save(cardlist, path)
+               ref.setValue(cardlist)
                update_main_screen(MainActivity())
-
            }
        }
 
@@ -43,12 +42,13 @@ class frontRecycleAdapter(public var cards: MutableList<card>):RecyclerView.Adap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val card = cards[position]
         holder.bind(card)
-        holder.new(MainActivity())
+
     }
 
     override fun getItemCount(): Int {

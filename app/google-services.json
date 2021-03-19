@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "41701858421",
+    "firebase_url": "https://my-super-list-29094-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "my-super-list-29094",
     "storage_bucket": "my-super-list-29094.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:41701858421:android:6d40b8d02695aceedbec3c",
+        "mobilesdk_app_id": "1:41701858421:android:5c1c29c3545cef83dbec3c",
         "android_client_info": {
           "package_name": "com.example.mysuperlist"
         }
