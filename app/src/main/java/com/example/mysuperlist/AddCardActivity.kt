@@ -14,14 +14,23 @@ class AddCardActivity: AppCompatActivity() {
         binding = ActivityAddcardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Add New List"
 
+
+        val position = intent.getIntExtra("position",-1)
+        if (position == -1){supportActionBar?.title = "Add New List"}
+        else{supportActionBar?.title = "Edit your List"}
         binding.SaveNewCard.setOnClickListener {
            val title= binding.AddTitle.text.toString()
             val inn_card_show  = mutableListOf<inn_card>()
-            cardlist.add(card(Title = title,list = inn_card_show))
-            ref.setValue(cardlist)
-            update_main_screen(MainActivity())
+            if (position == -1){
+
+                val newCard = card(Title = title,list = inn_card_show)
+                cardlist.add(newCard)
+            }
+            else{
+                cardlist[position].Title = title
+            }
+            ref.child(auth.uid.toString()).setValue(cardlist)
             finish()
         }
     }

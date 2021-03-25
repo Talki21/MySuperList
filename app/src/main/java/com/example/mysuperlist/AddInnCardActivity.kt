@@ -14,26 +14,25 @@ class AddInnCardActivity: AppCompatActivity() {
         binding = ActivityAddinncardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Add New Inn List"
+
+         val position= intent.getIntExtra("position2",-1)
+        if (position == -1){supportActionBar?.title = "Add New Inn List"}
+        else{supportActionBar?.title = "Edit your Inn List"}
 
         binding.SaveNewInnCard.setOnClickListener {
             val title= binding.AddInnTitle.text.toString()
-            val id2 = intent.getIntExtra("id2",0)
-            val inn_card_new = inn_card(inn_id = id2,check = false,inn_title = title)
-
+            val inn_card_new = inn_card(inn_id = cardIdHolder.Card_id,check = false,inn_title = title)
+            println("aaaaaaa ************ add${inn_card_new}")
             cardlist.forEach {
-                if (it.id == id2)
+                if (it.id == cardIdHolder.Card_id)
                 {
-                    println("111111****${it.id}")
-                    println("111111****${id2}")
-                    it.list.add(inn_card_new)
-                    println("111111****${cardlist}")
+                    if (position == -1){it.list.add(inn_card_new)}
+                    else{it.list[position].inn_title = title}
+                    put_progress(cardIdHolder.Card_id)
+                    ref.child(auth.uid.toString()).setValue(cardlist)
+                    finish()
                 }
             }
-            put_progress(id2)
-            ref.setValue(cardlist)
-            update_secand_screen(SecandActivity(),id2)
-            finish()
         }
     }
 }
