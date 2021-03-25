@@ -4,20 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mysuperl.secandRecycleAdapter
 import com.example.mysuperlist.data.inn_card
 import com.example.mysuperlist.databinding.ActivitySecandBinding
-
-
+import com.example.mysuperlist.databinding.ItemInnLayoutBinding
 
 
 
 private lateinit var binding: ActivitySecandBinding
-
-fun update_secand_screen(con : SecandActivity,id:Int){
+fun update_secand_screen(){
     val inn_card_show  = mutableListOf<inn_card>()
     cardlist.forEach {
-        if (it.id == id)
+        if (it.id == cardIdHolder.Card_id)
         {
             it.list.forEach { x ->
                 inn_card_show.add(x)
@@ -27,33 +24,35 @@ fun update_secand_screen(con : SecandActivity,id:Int){
             binding.prosentInn.text = "${it.Progress}%"
         }
     }
-    binding.recycleSecand.adapter = secandRecycleAdapter(inn_card_show)
-    binding.recycleSecand.layoutManager = LinearLayoutManager(con)
+
+    binding.recycleSecand.adapter = SecandRecycleAdapter(inn_card_show)
+    binding.recycleSecand.layoutManager = LinearLayoutManager(SecandActivity())
 }
 
+class SecandActivity : AppCompatActivity(){
 
-class SecandActivity() : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySecandBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val ID = intent.getIntExtra("id", 0)
-
         if (supportActionBar != null) { this.supportActionBar?.hide() }
+
 
         binding.floatingActionButtonInn.setOnClickListener {
             val intent = Intent(this, AddInnCardActivity::class.java)
-            intent.putExtra("id2", ID)
             startActivity(intent)
         }
-        update_secand_screen(this,ID)
+        update_secand_screen()
     }
-
+    
+    override fun onStart() {
+        update_secand_screen()
+        super.onStart()
+    }
     override fun onBackPressed() {
-        put_progress(card_id)
+        put_progress(cardIdHolder.Card_id)
         finish()
     }
 }
