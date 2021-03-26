@@ -5,13 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mysuperlist.data.card
-import com.example.mysuperlist.data.inn_card
 import com.example.mysuperlist.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlin.properties.Delegates
 
@@ -26,13 +22,15 @@ class cardIdHolder {
         var Card_id by Delegates.notNull<Int>()
     }
 }
+
 private lateinit var binding: ActivityMainBinding
 
 // updata hoved skjerm
-fun update_main_screen(){ // updata hoved skjerm
+fun update_main_screen() { // updata hoved skjerm
     binding.recycleFront.adapter = FrontRecycleAdapter(cardlist)
     binding.recycleFront.layoutManager = LinearLayoutManager(MainActivity())
 }
+
 class MainActivity : AppCompatActivity() {
 
 

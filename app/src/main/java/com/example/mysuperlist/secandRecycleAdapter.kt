@@ -15,19 +15,18 @@ class SecandRecycleAdapter(var InnCards: MutableList<inn_card>) :
     class ViewHolder(val binding: ItemInnLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             cardlist.forEach {
-                if (it.id == cardIdHolder.Card_id)
-                {
+                if (it.id == cardIdHolder.Card_id) {
                     binding.checkBox.isChecked = it.list[position].check
-                    binding.cardInnTitle.text =  it.list[position].inn_title
+                    binding.cardInnTitle.text = it.list[position].inn_title
                 }
             }
         }
+
         init {
             binding.cardInnRemove.setOnClickListener {
                 val position: Int = adapterPosition
                 cardlist.forEach {
-                    if (it.id == cardIdHolder.Card_id)
-                    {
+                    if (it.id == cardIdHolder.Card_id) {
                         it.list.removeAt(position)
                         put_progress(cardIdHolder.Card_id)
                     }
@@ -36,19 +35,16 @@ class SecandRecycleAdapter(var InnCards: MutableList<inn_card>) :
                 update_secand_screen()
             }
         }
+
         init {
             binding.checkBox.setOnClickListener {
                 val position: Int = adapterPosition
                 cardlist.forEach {
-                    if (it.id == cardIdHolder.Card_id)
-                    {
-                        if (it.list[position].check)
-                        {
+                    if (it.id == cardIdHolder.Card_id) {
+                        if (it.list[position].check) {
                             binding.checkBox.isChecked = false
                             it.list[position].check = false
-                        }
-                        else
-                        {
+                        } else {
                             binding.checkBox.isChecked = true
                             it.list[position].check = true
                         }
@@ -59,6 +55,7 @@ class SecandRecycleAdapter(var InnCards: MutableList<inn_card>) :
                 update_secand_screen()
             }
         }
+
         init {
             binding.cardInnEdit.setOnClickListener {
                 val position: Int = adapterPosition
