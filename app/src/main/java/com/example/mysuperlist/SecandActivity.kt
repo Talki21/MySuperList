@@ -9,13 +9,11 @@ import com.example.mysuperlist.databinding.ActivitySecandBinding
 import com.example.mysuperlist.databinding.ItemInnLayoutBinding
 
 
-
 private lateinit var binding: ActivitySecandBinding
-fun update_secand_screen(){
-    val inn_card_show  = mutableListOf<inn_card>()
+fun update_secand_screen() {
+    val inn_card_show = mutableListOf<inn_card>()
     cardlist.forEach {
-        if (it.id == cardIdHolder.Card_id)
-        {
+        if (it.id == cardIdHolder.Card_id) {
             it.list.forEach { x ->
                 inn_card_show.add(x)
             }
@@ -29,7 +27,7 @@ fun update_secand_screen(){
     binding.recycleSecand.layoutManager = LinearLayoutManager(SecandActivity())
 }
 
-class SecandActivity : AppCompatActivity(){
+class SecandActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +35,9 @@ class SecandActivity : AppCompatActivity(){
         binding = ActivitySecandBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (supportActionBar != null) { this.supportActionBar?.hide() }
+        if (supportActionBar != null) {
+            this.supportActionBar?.hide()
+        }
 
 
         binding.floatingActionButtonInn.setOnClickListener {
@@ -46,11 +46,12 @@ class SecandActivity : AppCompatActivity(){
         }
         update_secand_screen()
     }
-    
+
     override fun onStart() {
         update_secand_screen()
         super.onStart()
     }
+
     override fun onBackPressed() {
         put_progress(cardIdHolder.Card_id)
         finish()

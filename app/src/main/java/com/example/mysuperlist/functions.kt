@@ -36,6 +36,7 @@ fun put_progress(int: Int) {
         }
     }
 }
+
 fun upload() {
     val get = object : ValueEventListener {
         override fun onDataChange(p0: DataSnapshot) {
