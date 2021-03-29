@@ -3,8 +3,11 @@ package com.example.mysuperlist
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mysuperlist.data.card
 import com.example.mysuperlist.data.inn_card
@@ -15,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
 
@@ -53,6 +57,22 @@ class MainActivity : AppCompatActivity() {
 
         if (supportActionBar != null) {
             this.supportActionBar?.hide()
+        }
+
+        val popupMenu = PopupMenu(this, night_dark)
+        popupMenu.menu.add(Menu.NONE, 0, 0, "Night Mode")
+        popupMenu.menu.add(Menu.NONE, 1, 1, "Light Mode")
+        popupMenu.setOnMenuItemClickListener {
+            val id = it.itemId
+            if (id == 0) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            false
+        }
+        night_dark.setOnClickListener {
+            popupMenu.show()
         }
 
         upload()

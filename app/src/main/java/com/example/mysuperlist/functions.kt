@@ -1,12 +1,17 @@
 package com.example.mysuperlist
 
 import android.util.Log
+import android.view.Menu
+import android.widget.PopupMenu
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.mysuperlist.data.card
 import com.example.mysuperlist.data.inn_card
+import com.example.mysuperlist.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_main.*
 
 fun signInAnonymously(auth: FirebaseAuth, tag: String) {
     auth.signInAnonymously().addOnSuccessListener {
@@ -36,4 +41,3 @@ fun put_progress(int: Int) {
         }
     }
 }
-

@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title"
-                    android:textColor="@color/black"
+
                     android:textSize="30sp" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:id="@+id/recycle_secand"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black"
+            android:background="@color/primary"
             tools:itemCount="10"
             tools:listitem="@layout/item_inn_layout"/>
     </LinearLayout>
@@ -77,5 +77,5 @@
         android:clickable="true"
         android:contentDescription="@string/add"
         android:focusable="true"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 </RelativeLayout>
