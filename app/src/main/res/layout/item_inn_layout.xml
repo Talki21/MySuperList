@@ -9,7 +9,7 @@
     android:focusable="true"
     android:foreground="?selectableItemBackground"
     app:cardCornerRadius="230dp"
-    android:background="@color/white">
+ >
 
     <RelativeLayout
         android:id="@+id/card_inn"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:text="@string/title"
-                android:textColor="@color/black"
+
                 android:textSize="20sp" />
 
         </LinearLayout>

@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -21,17 +21,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mylist"
-                android:textColor="@color/black"
-                android:textSize="30sp"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"/>
+                android:layout_margin="20dp"
+                android:text="@string/mylist"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/night_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/ic_add" />
+
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_front"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/primary"
             android:visibility="visible"
             tools:itemCount="20"
             tools:listitem="@layout/item_layout" />
@@ -46,10 +54,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/white"
+
         android:clickable="true"
         android:contentDescription="@string/add"
         android:focusable="true"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </RelativeLayout>
