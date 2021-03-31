@@ -57,18 +57,9 @@ class SecandActivity : AppCompatActivity() {
     }
 
     private fun onInnCardChecked(position:Int): Unit{
-        val binding2: ItemInnLayoutBinding
-        binding2 = ItemInnLayoutBinding.inflate(LayoutInflater.from(this))
         cardlist.forEach {
             if (it.id == cardIdHolder.Card_id) {
-                if (it.list[position].check) {
-
-                    binding2.checkBox.isChecked = false
-                    it.list[position].check = false
-                } else {
-                    binding2.checkBox.isChecked = true
-                    it.list[position].check = true
-                }
+                it.list[position].check = !it.list[position].check
                 put_progress(cardIdHolder.Card_id)
             }
         }

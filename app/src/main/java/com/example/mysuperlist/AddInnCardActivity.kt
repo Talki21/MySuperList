@@ -22,9 +22,9 @@ class AddInnCardActivity : AppCompatActivity() {
 
         val position = intent.getIntExtra("position2", -1)
         if (position == -1) {
-            supportActionBar?.title = "Add New Inn List"
+            supportActionBar?.title = "Add new item"
         } else {
-            supportActionBar?.title = "Edit your Inn List"
+            supportActionBar?.title = "Edit your item name"
         }
 
         AddInnTitle.addTextChangedListener(object : TextWatcher {
@@ -57,7 +57,7 @@ class AddInnCardActivity : AppCompatActivity() {
                 }
             }
             if (titleExisted) {
-                AddInnTitle.error = "You have a list with same name"
+                AddInnTitle.error = "You already have an item with this name"
             }
             else {
                 val inn_card_new =
