@@ -13,5 +13,5 @@ mulighet til å endre title på cards og inn_cards
 mulighet til å se antall inn_cards som tilhører enkelt cards fra hovedskjerm
 textview som viser proseten med tall til progress bar 
  
-#prosses
+# prosses
 fra commit datoer ser man at at prosjekte var nesten ferdig før andre forelesning var ute så mye av koden er selv læret fra youtube og netsider. mengde arebeid som ble bruket for dette prosjekte er ca 130-150 time inkludert tid ble brukt til video og lesing artikkler.
