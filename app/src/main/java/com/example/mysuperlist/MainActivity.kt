@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
 
-// å deklrere hoved listen her gir fleksibiletet til å endre eller addere hvor som helst
+
 var cardlist = mutableListOf<card>()
 val ref = FirebaseDatabase.getInstance().getReference("Users")
 val auth = Firebase.auth
@@ -34,10 +34,10 @@ class cardIdHolder {
 }
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
 
-    // updata hoved skjerm
-    fun update_main_screen() { // updata hoved skjerm
+    fun update_main_screen() {
         binding.recycleFront.adapter = FrontRecycleAdapter(
             cardlist,
             this::onCardClicked,
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val tag: String = "My Super List M"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -104,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         if (cardlist[position].list.isNotEmpty()) {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("List is not empty")
-            builder.setMessage("The list your trying to remove have som inn lists\n Do you want to remove it however")
+            builder.setMessage("The list you are trying to remove still has items.\n Do you still want to remove it?")
             builder.setPositiveButton("Yes") { _: DialogInterface, i: Int ->
                 cardlist.removeAt(position)
                 ref.child(auth.uid.toString()).setValue(cardlist)
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun upload() {
+    private fun upload() {
         val get = object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 cardlist.clear()

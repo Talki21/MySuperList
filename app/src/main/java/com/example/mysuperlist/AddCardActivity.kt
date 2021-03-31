@@ -21,7 +21,7 @@ class AddCardActivity : AppCompatActivity() {
         if (position == -1) {
             supportActionBar?.title = "Add New List"
         } else {
-            supportActionBar?.title = "Edit your List"
+            supportActionBar?.title = "Edit your List name"
         }
         AddTitle.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -50,7 +50,7 @@ class AddCardActivity : AppCompatActivity() {
                 }
             }
             if (titleExisted) {
-                AddTitle.error = "you have a list with same title"
+                AddTitle.error = "You already have a list with this title"
             } else {
                 val inn_card_show = mutableListOf<inn_card>()
                 if (position == -1) {
